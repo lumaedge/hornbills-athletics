@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Calendar from "@/components/Calendar";
 import { RaceEntry } from "@/lib/types";
 import { ALL_EVENTS, computeAge, getYearOfBirth } from "@/lib/constants";
+import { HOUSE_FULL } from "@/lib/config";
 
 export default function ReportsPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -93,7 +94,7 @@ export default function ReportsPage() {
       {selectedDate && activeReport === "attendance" && (
         <div className="print-area bg-white rounded-xl border shadow-sm p-6" id="print-attendance">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold">Hornbills Athletics</h2>
+            <h2 className="text-2xl font-bold">{HOUSE_FULL}</h2>
             <h3 className="text-lg text-gray-600">Attendance Register</h3>
             <p className="text-sm text-gray-500 mt-1">
               Date: {new Date(selectedDate + "T00:00:00").toLocaleDateString("en-ZA", {
@@ -156,7 +157,7 @@ export default function ReportsPage() {
               return (
                 <div key={key} className="print-area bg-white rounded-xl border shadow-sm p-6 print:break-inside-avoid">
                   <div className="text-center mb-4">
-                    <h2 className="text-xl font-bold">Hornbills Athletics</h2>
+                    <h2 className="text-xl font-bold">{HOUSE_FULL}</h2>
                     <h3 className="text-lg">{event} — {ageGroup} {gender}</h3>
                     <p className="text-sm text-gray-500">
                       Date: {new Date(selectedDate + "T00:00:00").toLocaleDateString("en-ZA", {

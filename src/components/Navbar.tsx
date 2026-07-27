@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HOUSE } from "@/lib/config";
 
 const links = [
   { href: "/", label: "Dashboard", icon: "🏠" },
@@ -19,7 +20,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <Link href="/" className="font-bold text-lg tracking-wide">
-              Hornbills
+              {HOUSE}
             </Link>
             <div className="hidden sm:flex gap-1">
               {links.map((link) => (

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { HOUSE, HOUSE_FULL } from "@/lib/config";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -51,7 +52,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Hornbills Athletics — Practice Day Manager</p>
+        <p className="text-gray-600 mt-1">{HOUSE_FULL} — Practice Day Manager</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -67,7 +68,7 @@ export default function Dashboard() {
         </div>
         <div className="bg-white rounded-xl border shadow-sm p-6">
           <div className="text-sm text-gray-500">House</div>
-          <div className="text-3xl font-bold text-green-700 mt-1">Hornbills</div>
+          <div className="text-3xl font-bold text-green-700 mt-1">{HOUSE}</div>
         </div>
       </div>
 

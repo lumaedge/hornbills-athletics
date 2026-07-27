@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { HOUSE, HOUSE_FULL } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Hornbills Athletics",
-  description: "Athletics management for Hornbills house",
+  title: `${HOUSE_FULL}`,
+  description: `Athletics management for ${HOUSE} house`,
 };
 
 export default function RootLayout({
