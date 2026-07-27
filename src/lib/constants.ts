@@ -28,11 +28,8 @@ export function computeAgeGroup(dob: string, referenceDate?: Date): string {
     age--;
   }
   if (age <= 9) return "U10";
-  if (age <= 10) return "U11";
-  if (age <= 11) return "U12";
-  if (age <= 12) return "U13";
-  if (age <= 13) return "U14";
-  return "U14";
+  if (age >= 14) return "U14";
+  return `U${age}`;
 }
 
 export function isAthleticsDay(date: Date): boolean {
