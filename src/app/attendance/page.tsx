@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Calendar from "@/components/Calendar";
 import { Learner } from "@/lib/types";
-import { ACTIVE_AGE_GROUPS } from "@/lib/constants";
+import { ACTIVE_AGE_GROUPS, computeAge, getYearOfBirth } from "@/lib/constants";
 
 interface AttendanceRow {
   learner_id: number;
@@ -249,7 +249,7 @@ export default function AttendancePage() {
                               {learner.surname}, {learner.first_name}
                             </div>
                             <div className="text-xs text-gray-500">
-                              #{learner.learner_number} · {learner.gender === "M" ? "Boy" : "Girl"}
+                              #{learner.learner_number} · {learner.gender === "M" ? "Boy" : "Girl"} · {getYearOfBirth(learner.birth_date)} · Age {computeAge(learner.birth_date)}
                             </div>
                           </div>
                         </div>

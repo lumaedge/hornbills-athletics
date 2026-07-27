@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     }
 
     const result = await query(
-      `SELECT a.*, l.surname, l.first_name, l.learner_number, l.gender, l.age_group, l.house
+      `SELECT a.*, l.surname, l.first_name, l.learner_number, l.gender, l.age_group, l.house, l.birth_date
        FROM attendance a
        JOIN learners l ON a.learner_id = l.id
        WHERE a.date = $1

@@ -19,7 +19,7 @@ export const ALL_EVENTS = [...TRACK_EVENTS, ...FIELD_EVENTS];
 
 export const GENDERS = ["Boys", "Girls"];
 
-export function computeAgeGroup(dob: string, referenceDate?: Date): string {
+export function computeAge(dob: string, referenceDate?: Date): number {
   const birthDate = new Date(dob);
   const ref = referenceDate || new Date();
   let age = ref.getFullYear() - birthDate.getFullYear();
@@ -27,9 +27,18 @@ export function computeAgeGroup(dob: string, referenceDate?: Date): string {
   if (m < 0 || (m === 0 && ref.getDate() < birthDate.getDate())) {
     age--;
   }
+  return age;
+}
+
+export function computeAgeGroup(dob: string, referenceDate?: Date): string {
+  const age = computeAge(dob, referenceDate);
   if (age <= 9) return "U9";
   if (age >= 14) return "U14";
   return `U${age}`;
+}
+
+export function getYearOfBirth(dob: string): number {
+  return new Date(dob).getFullYear();
 }
 
 export const ACTIVE_AGE_GROUPS = ["U10", "U11", "U12", "U13", "U14"];

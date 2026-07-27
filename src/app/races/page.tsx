@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Calendar from "@/components/Calendar";
 import { Learner, RaceEntry } from "@/lib/types";
-import { ALL_EVENTS, GENDERS, ACTIVE_AGE_GROUPS } from "@/lib/constants";
+import { ALL_EVENTS, GENDERS, ACTIVE_AGE_GROUPS, computeAge, getYearOfBirth } from "@/lib/constants";
 
 export default function RacesPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -252,7 +252,7 @@ export default function RacesPage() {
                         <div key={learner.id} className="flex items-center justify-between px-4 py-3 hover:bg-gray-50">
                           <div>
                             <div className="font-medium text-gray-900">{learner.surname}, {learner.first_name}</div>
-                            <div className="text-xs text-gray-500">#{learner.learner_number}</div>
+                            <div className="text-xs text-gray-500">#{learner.learner_number} · {getYearOfBirth(learner.birth_date)} · Age {computeAge(learner.birth_date)}</div>
                           </div>
                           <button
                             onClick={() => addLearner(learner.id)}

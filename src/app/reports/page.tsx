@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Calendar from "@/components/Calendar";
 import { RaceEntry } from "@/lib/types";
-import { ALL_EVENTS } from "@/lib/constants";
+import { ALL_EVENTS, computeAge, getYearOfBirth } from "@/lib/constants";
 
 export default function ReportsPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -112,6 +112,8 @@ export default function ReportsPage() {
                 <th className="border p-2 text-left">Name</th>
                 <th className="border p-2 text-left">Surname</th>
                 <th className="border p-2 text-center">Gender</th>
+                <th className="border p-2 text-center">Year</th>
+                <th className="border p-2 text-center">Age</th>
                 <th className="border p-2 text-center">Age Group</th>
                 <th className="border p-2 text-center w-20">Present</th>
                 <th className="border p-2 text-center w-20">Absent</th>
@@ -124,6 +126,8 @@ export default function ReportsPage() {
                   <td className="border p-2">{record.first_name}</td>
                   <td className="border p-2">{record.surname}</td>
                   <td className="border p-2 text-center">{record.gender === "M" ? "Boy" : "Girl"}</td>
+                  <td className="border p-2 text-center">{getYearOfBirth(record.birth_date)}</td>
+                  <td className="border p-2 text-center">{computeAge(record.birth_date)}</td>
                   <td className="border p-2 text-center">{record.age_group}</td>
                   <td className="border p-2 text-center">{record.status === "present" ? "✓" : ""}</td>
                   <td className="border p-2 text-center">{record.status === "absent" ? "✗" : ""}</td>
