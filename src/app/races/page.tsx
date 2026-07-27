@@ -191,14 +191,14 @@ export default function RacesPage() {
           {selectedDate && selectedEvent && selectedAgeGroup && selectedGender ? (
             <div className="bg-white rounded-xl border shadow-sm">
               <div className="p-4 border-b">
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
                   <h2 className="font-bold text-lg">
                     {selectedEvent} — {selectedAgeGroup} {selectedGender}
                   </h2>
                   <div className="flex bg-gray-100 rounded-lg p-1">
                     <button
                       onClick={() => setActiveTab("select")}
-                      className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                      className={`flex-1 sm:flex-none px-3 py-1 rounded-md text-sm font-medium transition-colors ${
                         activeTab === "select" ? "bg-white shadow text-gray-900" : "text-gray-600"
                       }`}
                     >
@@ -206,7 +206,7 @@ export default function RacesPage() {
                     </button>
                     <button
                       onClick={() => setActiveTab("entries")}
-                      className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                      className={`flex-1 sm:flex-none px-3 py-1 rounded-md text-sm font-medium transition-colors ${
                         activeTab === "entries" ? "bg-white shadow text-gray-900" : "text-gray-600"
                       }`}
                     >

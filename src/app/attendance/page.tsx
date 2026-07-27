@@ -162,7 +162,7 @@ export default function AttendancePage() {
           {selectedDate ? (
             <div className="bg-white rounded-xl border shadow-sm">
               <div className="p-4 border-b space-y-3">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <input
                     type="text"
                     placeholder="Search by name..."
@@ -175,7 +175,7 @@ export default function AttendancePage() {
                     onChange={(e) => setFilterGender(e.target.value)}
                     className="border rounded-lg px-3 py-2 text-sm"
                   >
-                    <option value="">All Genders</option>
+                    <option value="">All</option>
                     <option value="M">Boys</option>
                     <option value="F">Girls</option>
                   </select>
