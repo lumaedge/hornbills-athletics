@@ -3,9 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Calendar from "@/components/Calendar";
 import { Learner, RaceEntry } from "@/lib/types";
-import { ALL_EVENTS, GENDERS } from "@/lib/constants";
-
-const AGE_GROUPS = ["U10", "U11", "U12", "U13", "U14"];
+import { ALL_EVENTS, GENDERS, ACTIVE_AGE_GROUPS } from "@/lib/constants";
 
 export default function RacesPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -51,6 +49,7 @@ export default function RacesPage() {
 
   const eligibleLearners = learners.filter((l) => {
     if (!selectedEvent || !selectedAgeGroup || !selectedGender) return false;
+    if (l.age_group === "U9") return false;
 
     const baseAgeGroup = selectedAgeGroup.replace(/[AB]$/, "");
     if (l.age_group !== baseAgeGroup) return false;
@@ -132,7 +131,7 @@ export default function RacesPage() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Age Group</label>
                 <div className="grid grid-cols-5 gap-1">
-                  {AGE_GROUPS.map((ag) => (
+                  {ACTIVE_AGE_GROUPS.map((ag) => (
                     <button
                       key={ag}
                       onClick={() => {

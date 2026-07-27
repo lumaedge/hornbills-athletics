@@ -27,10 +27,12 @@ export function computeAgeGroup(dob: string, referenceDate?: Date): string {
   if (m < 0 || (m === 0 && ref.getDate() < birthDate.getDate())) {
     age--;
   }
-  if (age <= 9) return "U10";
+  if (age <= 9) return "U9";
   if (age >= 14) return "U14";
   return `U${age}`;
 }
+
+export const ACTIVE_AGE_GROUPS = ["U10", "U11", "U12", "U13", "U14"];
 
 export function isAthleticsDay(date: Date): boolean {
   const day = date.getDay();

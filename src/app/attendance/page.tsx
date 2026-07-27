@@ -3,8 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Calendar from "@/components/Calendar";
 import { Learner } from "@/lib/types";
-
-const AGE_GROUPS = ["U10", "U11", "U12", "U13", "U14"];
+import { ACTIVE_AGE_GROUPS } from "@/lib/constants";
 
 interface AttendanceRow {
   learner_id: number;
@@ -111,6 +110,7 @@ export default function AttendancePage() {
   const filteredLearners = learners.filter((l) => {
     if (!selectedAgeGroup) return false;
     if (l.age_group !== selectedAgeGroup) return false;
+    if (l.age_group === "U9") return false;
     if (search) {
       const q = search.toLowerCase();
       if (!l.surname.toLowerCase().includes(q) && !l.first_name.toLowerCase().includes(q)) {
@@ -140,7 +140,7 @@ export default function AttendancePage() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Age Group</label>
                 <div className="grid grid-cols-5 gap-1">
-                  {AGE_GROUPS.map((ag) => (
+                  {ACTIVE_AGE_GROUPS.map((ag) => (
                     <button
                       key={ag}
                       onClick={() => setSelectedAgeGroup(ag)}
