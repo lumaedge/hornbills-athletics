@@ -119,8 +119,8 @@ export default function RacesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Event Practice</h1>
-        <p className="text-gray-600 mt-1">Track which learners practice which events</p>
+        <h1 className="text-3xl font-bold text-gray-900">Race Entries</h1>
+        <p className="text-gray-600 mt-1">Select which learners are doing which races</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -307,7 +307,7 @@ export default function RacesPage() {
 
           {selectedDate && Object.keys(groupedEntries).length > 0 && (
             <div className="mt-4 bg-white rounded-xl border shadow-sm p-4">
-              <h3 className="font-bold text-sm text-gray-700 mb-3">All Practice Entries Today</h3>
+              <h3 className="font-bold text-sm text-gray-700 mb-3">All Race Entries Today</h3>
               <div className="space-y-3">
                 {Object.entries(groupedEntries).map(([key, items]) => (
                   <div key={key}>

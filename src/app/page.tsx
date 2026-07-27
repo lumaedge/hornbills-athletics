@@ -107,8 +107,8 @@ export default function Dashboard() {
           onClick={() => router.push("/races")}
           className="bg-white rounded-xl border shadow-sm p-6 text-left hover:border-green-500 transition-colors"
         >
-          <div className="text-lg font-bold text-gray-900">🏅 Event Practice</div>
-          <div className="text-sm text-gray-500 mt-1">Track practice events</div>
+          <div className="text-lg font-bold text-gray-900">🏅 Race Entries</div>
+          <div className="text-sm text-gray-500 mt-1">Select learners for races</div>
         </button>
         <button
           onClick={() => router.push("/reports")}
