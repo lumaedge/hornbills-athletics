@@ -22,12 +22,7 @@ export const GENDERS = ["Boys", "Girls"];
 export function computeAge(dob: string, referenceDate?: Date): number {
   const birthDate = new Date(dob);
   const ref = referenceDate || new Date();
-  let age = ref.getFullYear() - birthDate.getFullYear();
-  const m = ref.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && ref.getDate() < birthDate.getDate())) {
-    age--;
-  }
-  return age;
+  return ref.getFullYear() - birthDate.getFullYear();
 }
 
 export function computeAgeGroup(dob: string, referenceDate?: Date): string {
