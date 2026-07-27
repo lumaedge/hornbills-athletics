@@ -10,6 +10,10 @@ function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
 
+function formatDate(d: Date) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 interface CalendarProps {
   selectedDate: string | null;
   onSelect: (date: string) => void;
@@ -19,6 +23,22 @@ export default function Calendar({ selectedDate, onSelect }: CalendarProps) {
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
+
+  useEffect(() => {
+    if (selectedDate) return;
+    const today = new Date();
+    const dow = today.getDay();
+    if (dow === 2 || dow === 4) {
+      onSelect(formatDate(today));
+    } else {
+      const next = new Date(today);
+      let daysUntil = (2 - dow + 7) % 7;
+      if (daysUntil === 0) daysUntil = (4 - dow + 7) % 7;
+      if (daysUntil === 0) daysUntil = 7;
+      next.setDate(next.getDate() + daysUntil);
+      onSelect(formatDate(next));
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const daysInMonth = getDaysInMonth(year, month);
   const firstDay = getDayOfWeek(year, month, 1);
