@@ -51,7 +51,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Hornbills Athletics Management</p>
+        <p className="text-gray-600 mt-1">Hornbills Athletics — Practice Day Manager</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -101,14 +101,14 @@ export default function Dashboard() {
           className="bg-white rounded-xl border shadow-sm p-6 text-left hover:border-green-500 transition-colors"
         >
           <div className="text-lg font-bold text-gray-900">📋 Attendance</div>
-          <div className="text-sm text-gray-500 mt-1">Mark present/absent</div>
+          <div className="text-sm text-gray-500 mt-1">Mark by age group</div>
         </button>
         <button
           onClick={() => router.push("/races")}
           className="bg-white rounded-xl border shadow-sm p-6 text-left hover:border-green-500 transition-colors"
         >
-          <div className="text-lg font-bold text-gray-900">🏅 Race Teams</div>
-          <div className="text-sm text-gray-500 mt-1">Assign to events</div>
+          <div className="text-lg font-bold text-gray-900">🏅 Event Practice</div>
+          <div className="text-sm text-gray-500 mt-1">Track practice events</div>
         </button>
         <button
           onClick={() => router.push("/reports")}

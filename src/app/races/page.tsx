@@ -5,6 +5,8 @@ import Calendar from "@/components/Calendar";
 import { Learner, RaceEntry } from "@/lib/types";
 import { ALL_EVENTS, GENDERS } from "@/lib/constants";
 
+const AGE_GROUPS = ["U10", "U11", "U12", "U13", "U14"];
+
 export default function RacesPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [learners, setLearners] = useState<Learner[]>([]);
@@ -117,8 +119,8 @@ export default function RacesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Race Team Selection</h1>
-        <p className="text-gray-600 mt-1">Assign learners to events</p>
+        <h1 className="text-3xl font-bold text-gray-900">Event Practice</h1>
+        <p className="text-gray-600 mt-1">Track which learners practice which events</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -128,59 +130,72 @@ export default function RacesPage() {
           {selectedDate && (
             <div className="bg-white rounded-xl border shadow-sm p-4 space-y-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Event</label>
-                <select
-                  value={selectedEvent}
-                  onChange={(e) => {
-                    setSelectedEvent(e.target.value);
-                    setSelectedAgeGroup("");
-                    setMessage("");
-                  }}
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                >
-                  <option value="">Select event</option>
-                  <optgroup label="Track">
-                    {ALL_EVENTS.filter((e) => !["High Jump", "Long Jump", "Shot Put"].includes(e.name)).map((e) => (
-                      <option key={e.name} value={e.name}>{e.name}</option>
-                    ))}
-                  </optgroup>
-                  <optgroup label="Field">
-                    {ALL_EVENTS.filter((e) => ["High Jump", "Long Jump", "Shot Put"].includes(e.name)).map((e) => (
-                      <option key={e.name} value={e.name}>{e.name}</option>
-                    ))}
-                  </optgroup>
-                </select>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Age Group</label>
+                <div className="grid grid-cols-5 gap-1">
+                  {AGE_GROUPS.map((ag) => (
+                    <button
+                      key={ag}
+                      onClick={() => {
+                        setSelectedAgeGroup(ag);
+                        setSelectedEvent("");
+                        setMessage("");
+                      }}
+                      className={`py-2 rounded-lg text-sm font-bold transition-colors ${
+                        selectedAgeGroup === ag
+                          ? "bg-green-700 text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }`}
+                    >
+                      {ag}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {selectedEvent && (
+              {selectedAgeGroup && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Age Group</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Event</label>
                   <select
-                    value={selectedAgeGroup}
-                    onChange={(e) => setSelectedAgeGroup(e.target.value)}
+                    value={selectedEvent}
+                    onChange={(e) => {
+                      setSelectedEvent(e.target.value);
+                      setMessage("");
+                    }}
                     className="w-full border rounded-lg px-3 py-2 text-sm"
                   >
-                    <option value="">Select age group</option>
-                    {availableAgeGroups.map((ag) => (
-                      <option key={ag} value={ag}>{ag}</option>
-                    ))}
+                    <option value="">Select event</option>
+                    <optgroup label="Track">
+                      {ALL_EVENTS.filter((e) => !["High Jump", "Long Jump", "Shot Put"].includes(e.name)).map((e) => (
+                        <option key={e.name} value={e.name}>{e.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Field">
+                      {ALL_EVENTS.filter((e) => ["High Jump", "Long Jump", "Shot Put"].includes(e.name)).map((e) => (
+                        <option key={e.name} value={e.name}>{e.name}</option>
+                      ))}
+                    </optgroup>
                   </select>
                 </div>
               )}
 
-              {selectedAgeGroup && (
+              {selectedEvent && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                  <select
-                    value={selectedGender}
-                    onChange={(e) => setSelectedGender(e.target.value)}
-                    className="w-full border rounded-lg px-3 py-2 text-sm"
-                  >
-                    <option value="">Select gender</option>
+                  <div className="grid grid-cols-2 gap-1">
                     {GENDERS.map((g) => (
-                      <option key={g} value={g}>{g}</option>
+                      <button
+                        key={g}
+                        onClick={() => setSelectedGender(g)}
+                        className={`py-2 rounded-lg text-sm font-bold transition-colors ${
+                          selectedGender === g
+                            ? "bg-green-700 text-white"
+                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        }`}
+                      >
+                        {g}
+                      </button>
                     ))}
-                  </select>
+                  </div>
                 </div>
               )}
             </div>
@@ -210,7 +225,7 @@ export default function RacesPage() {
                         activeTab === "entries" ? "bg-white shadow text-gray-900" : "text-gray-600"
                       }`}
                     >
-                      Entered ({entries.length})
+                      In ({entries.length})
                     </button>
                   </div>
                 </div>
@@ -230,7 +245,7 @@ export default function RacesPage() {
               {activeTab === "select" ? (
                 <div className="divide-y max-h-[500px] overflow-y-auto">
                   {eligibleLearners.length === 0 ? (
-                    <div className="p-8 text-center text-gray-500">No eligible learners found</div>
+                    <div className="p-8 text-center text-gray-500">No eligible learners</div>
                   ) : (
                     eligibleLearners.map((learner) => {
                       const isEntered = enteredIds.has(learner.id);
@@ -259,7 +274,7 @@ export default function RacesPage() {
               ) : (
                 <div className="divide-y max-h-[500px] overflow-y-auto">
                   {entries.length === 0 ? (
-                    <div className="p-8 text-center text-gray-500">No entries yet</div>
+                    <div className="p-8 text-center text-gray-500">No one in this practice yet</div>
                   ) : (
                     entries.map((entry) => (
                       <div key={entry.id} className="flex items-center justify-between px-4 py-3 hover:bg-gray-50">
@@ -280,15 +295,19 @@ export default function RacesPage() {
             </div>
           ) : (
             <div className="bg-white rounded-xl border shadow-sm p-12 text-center text-gray-500">
-              {selectedDate
-                ? "Select an event, age group, and gender to begin"
-                : "Select a date from the calendar to begin"}
+              {!selectedDate
+                ? "Select a practice day"
+                : !selectedAgeGroup
+                  ? "Select an age group"
+                  : !selectedEvent
+                    ? "Select an event"
+                    : "Select gender"}
             </div>
           )}
 
           {selectedDate && Object.keys(groupedEntries).length > 0 && (
             <div className="mt-4 bg-white rounded-xl border shadow-sm p-4">
-              <h3 className="font-bold text-sm text-gray-700 mb-3">All Entries for This Date</h3>
+              <h3 className="font-bold text-sm text-gray-700 mb-3">All Practice Entries Today</h3>
               <div className="space-y-3">
                 {Object.entries(groupedEntries).map(([key, items]) => (
                   <div key={key}>
